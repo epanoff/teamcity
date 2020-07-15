@@ -1,0 +1,30 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: teamcity
+spec:
+  replicas:  1
+  selector:
+    matchLabels:
+      app: teamcity
+  template:
+    metadata:
+      labels:
+        app: teamcity
+    spec:
+      containers:
+          - name: teamcity
+            image: jetbrains/teamcity-server
+            ports:
+              - name: teamcity
+                containerPort: 8111
+            volumeMounts:
+              - name:  teamcity-data
+                mountPath: /var/lib/teamcity
+      volumes:
+          - name: teamcity-data
+            source:
+              persistentDisk:
+                pdName: teamcity-backup
+                fsType: ext4
+            

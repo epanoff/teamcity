@@ -1,0 +1,27 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: teamcity-agent
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: teamcity-agent
+  template:
+    metadata:
+      labels:
+        app: teamcity-agent
+    spec:
+      containers:
+         - name: teamcityagent
+           image: jetbrains/teamcity-agent
+           env:
+             - name: TEAMCITY_SERVER
+               value: http://teamcity:8111
+           volumeMounts:
+             - name:  agent-data
+               mountPath: /data
+      volumes:
+          - name: agent-data
+            hostPath:
+                path: /var/buildAgent
