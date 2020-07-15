@@ -24,9 +24,13 @@ variable "allocated_storage" {
   description = "allocated storage"
 }
 
-#variable "password" {
-#  description = "database-password"
-#}
+variable "username" {
+  description = "database-username"
+}
+
+variable "password" {
+  description = "database-password"
+}
 
 variable "deletion_protection" {
   default = false
@@ -41,3 +45,11 @@ variable "dbname" {}
 variable "engine_version" {
   
 }
+
+variable "vpc_id" {
+  description = "vpc_id"
+}
+variable "subnet_id" {
+  description = "subnet_name"
+}
+

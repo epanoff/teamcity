@@ -8,10 +8,17 @@ variable "aws_secret_key" {
 
 variable "region" {
   description = "region"
-  default = "us-east-2"
+  default     = "us-east-2"
 }
 variable "environment" {
   description = "environment"
-  default = "prod"
+  default     = "prod"
 }
 
+variable "rds_db_username" {
+  description = "database-username"
+}
+
+variable "rds_db_password" {
+  description = "database-password"
+}

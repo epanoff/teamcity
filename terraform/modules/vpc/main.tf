@@ -1,7 +1,8 @@
 
 resource "aws_vpc" "teamcity" {
   cidr_block = "10.0.0.0/16"
-
+  enable_dns_support  = true
+  enable_dns_hostnames  = true
   tags = map(
     "Name", "terraform-eks-teamcity-node",
     "kubernetes.io/cluster/${var.cluster-name}", "shared",
@@ -9,7 +10,7 @@ resource "aws_vpc" "teamcity" {
 }
 
 resource "aws_subnet" "teamcity" {
-  count = 2
+  count = 3
 
   availability_zone       = data.aws_availability_zones.available.names[count.index]
   cidr_block              = "10.0.${count.index}.0/24"
@@ -21,6 +22,16 @@ resource "aws_subnet" "teamcity" {
     "kubernetes.io/cluster/${var.cluster-name}", "shared",
   )
 }
+
+resource "aws_db_subnet_group" "teamcity" {
+  name       = "main"
+  subnet_ids = [for s in aws_subnet.teamcity : s.id]
+
+  tags = {
+    Name = "teamcity subnet group"
+  }
+}
+
 
 resource "aws_internet_gateway" "teamcity" {
   vpc_id = aws_vpc.teamcity.id
