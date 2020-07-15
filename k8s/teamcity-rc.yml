@@ -1,6 +1,6 @@
 id: teamcity
 kind: ReplicationController
-apiVersion: v1beta1
+apiVersion: v1
 labels:
   name: teamcity
 desiredState:

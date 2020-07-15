@@ -11,11 +11,11 @@ module "postgres" {
   allocated_storage = "10"
   dbname            = "teamcity"
   engine_version    = "11.4"
-  vpc_id              = module.vpc.vpc_id
+  vpc_id            = module.vpc.vpc_id
   environment       = var.environment
   username          = var.rds_db_username
   password          = var.rds_db_password
-  subnet_id = module.vpc.aws_subnet_group_teamcity
+  subnet_id         = module.vpc.aws_subnet_group_teamcity
 }
 
 module "vpc" {

@@ -9,7 +9,12 @@
 - rds_db_username = "rds_db_username"
 - rds_db_password = "rds_db_password"
 
-Далее можно пременить
+Так же потребуется поставить
+```sh
+brew install aws-iam-authenticator
+```
+
+Далее можно пременить (на примере прода)
 ```sh
 cd prod
 terraform apply
@@ -21,7 +26,7 @@ terraform output kubeconfig>~/.kube/config
 ```
 
 ```sh
-cd ../k8s
+cd ../../k8s
 kubectl create -f  teamcity-agent-rc.yml
 kubectl create -f  teamcity-rc.yml
 kubectl create -f  teamcity-service.yml
