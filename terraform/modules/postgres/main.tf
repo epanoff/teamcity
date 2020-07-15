@@ -15,7 +15,7 @@ resource "aws_db_instance" "teamcity-cluster" {
   multi_az                    = true
   vpc_security_group_ids      = [aws_security_group.teamcity-rds.id]
   db_subnet_group_name        = var.subnet_id.name
-  skip_final_snapshot         = false
+  skip_final_snapshot         = true
   allow_major_version_upgrade = true
   deletion_protection         = var.deletion_protection
 
