@@ -1,0 +1,30 @@
+id: teamcity-agent
+kind: ReplicationController
+apiVersion: v1beta1
+labels:
+  name: teamcity-agent
+desiredState:
+  replicas: 3
+  replicaSelector:
+    name: teamcity-agent
+  podTemplate:
+    labels:
+      name: teamcity-agent
+    desiredState:
+      manifest:
+       version: v1beta1
+       id: teamcity-agent
+       containers:
+         - name: teamcityagent
+           image: jetbrains/teamcity-agent
+           env:
+             - name: TEAMCITY_SERVER
+               value: http://teamcity:8111
+           volumeMounts:
+             - name:  agent-data
+               mountPath: /data
+       volumes:
+          - name: agent-data
+            source:
+              hostDir:
+                path: /var/buildAgent

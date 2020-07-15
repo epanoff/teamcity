@@ -1,0 +1,30 @@
+id: teamcity
+kind: ReplicationController
+apiVersion: v1beta1
+labels:
+  name: teamcity
+desiredState:
+  replicas: 1
+  replicaSelector:
+    name: teamcity
+  podTemplate:
+    labels:
+      name: teamcity
+    desiredState:
+      manifest:
+        id: teamcity
+        containers:
+          - name: teamcity
+            image: jetbrains/teamcity-server
+            ports:
+              - name: teamcity
+                containerPort: 8111
+            volumeMounts:
+              - name:  teamcity-data
+                mountPath: /var/lib/teamcity
+        volumes:
+          - name: teamcity-data
+            source:
+              persistentDisk:
+                pdName: teamcity-backup
+                fsType: ext4
