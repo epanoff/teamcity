@@ -11,3 +11,7 @@ variable "cluster-name" {
   default = "terraform-eks-teamcity"
   type    = string
 }
+
+variable "workstation_ip" {
+  description = "workstation_ip for sg"
+}

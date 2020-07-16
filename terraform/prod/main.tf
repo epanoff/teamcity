@@ -27,4 +27,5 @@ module "teamcityeks" {
   source              = "../modules/teamcityeks"
   vpc_id              = module.vpc.vpc_id
   aws_subnet_teamcity = module.vpc.aws_subnet_teamcity_eks
+  workstation_ip = "176.57.72.47"
 }

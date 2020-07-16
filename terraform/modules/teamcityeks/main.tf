@@ -45,7 +45,7 @@ resource "aws_security_group" "teamcity-cluster" {
 }
 
 resource "aws_security_group_rule" "teamcity-cluster-ingress-workstation-https" {
-  cidr_blocks       = ["176.57.72.47/32"]
+  cidr_blocks       = ["${var.workstation_ip}/32"]
   description       = "Allow workstation to communicate with the cluster API Server"
   from_port         = 443
   protocol          = "tcp"

@@ -22,9 +22,7 @@ spec:
               - name:  teamcity-data
                 mountPath: /var/lib/teamcity
       volumes:
-          - name: teamcity-data
-            source:
-              persistentDisk:
-                pdName: teamcity-backup
-                fsType: ext4
+      - name: "teamcity-data"
+        persistentVolumeClaim:
+          claimName: "teamcity-data"
             
