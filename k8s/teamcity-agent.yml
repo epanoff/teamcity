@@ -16,7 +16,7 @@ spec:
          - name: teamcityagent
            image: jetbrains/teamcity-agent
            env:
-             - name: TEAMCITY_SERVER
+             - name: SERVER_URL
                value: http://teamcity:8111
            volumeMounts:
              - name:  agent-data

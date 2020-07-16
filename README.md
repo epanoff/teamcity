@@ -28,6 +28,7 @@ mkdir ~/.kube/
 terraform output kubeconfig>~/.kube/config
 ```
 
+И запускаем, тимсити с persistent volume и тремя агентами. 
 ```sh
 cd ../../k8s
 kubectl create -f teamcity-agent.yml

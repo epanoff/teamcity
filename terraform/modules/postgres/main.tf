@@ -1,5 +1,5 @@
 resource "aws_db_instance" "teamcity-cluster" {
-  identifier                  = var.identifier 
+  identifier                  = var.identifier
   allocated_storage           = var.allocated_storage
   storage_type                = "gp2"
   engine                      = "postgres"
@@ -34,6 +34,13 @@ resource "aws_security_group" "teamcity-rds" {
   name        = "terraform-rds-teamcity-cluster"
   description = "Cluster communication with rds"
   vpc_id      = var.vpc_id
+
+  ingress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = var.aws_subnet_teamcity_eks[*].cidr_block
+  }
 
   egress {
     from_port   = 0

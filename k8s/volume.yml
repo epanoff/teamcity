@@ -1,7 +1,7 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: teamcity
+  name: teamcity-data
   annotations:
     volume.beta.kubernetes.io/storage-class: "gp2"
 spec:

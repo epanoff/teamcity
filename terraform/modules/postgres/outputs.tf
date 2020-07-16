@@ -6,6 +6,10 @@ output "db_port" {
   value = "${aws_db_instance.teamcity-cluster.port}"
 }
 
+output "db_name" {
+  value = "${aws_db_instance.teamcity-cluster.name}"
+}
+
 output "db_user_id" {
   value = "${aws_db_instance.teamcity-cluster.username}"
 }

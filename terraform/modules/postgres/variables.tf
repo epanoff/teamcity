@@ -1,17 +1,3 @@
-#variable "sg_id" {
-#  type        = list
-#  description = "aws security group id"
-#}
-
-#variable "subnet_id" {
-#  description = "aws subnet id"
-#}
-
-#variable "region" {
-#  description = "aws region"
-#}
-
-
 variable "instance" {
   description = "aws instance"
 }
@@ -43,7 +29,7 @@ variable "environment" {
 variable "dbname" {}
 
 variable "engine_version" {
-  
+
 }
 
 variable "vpc_id" {
@@ -52,4 +38,9 @@ variable "vpc_id" {
 variable "subnet_id" {
   description = "subnet_name"
 }
+
+variable "aws_subnet_teamcity_eks" {
+  description = "subnets for sg"
+}
+
 
