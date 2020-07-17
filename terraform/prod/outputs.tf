@@ -6,6 +6,10 @@ output "db_port" {
   value = module.postgres.db_port
 }
 
+output "db_name" {
+  value = module.postgres.db_name
+}
+
 output "db_user_id" {
   value = module.postgres.db_user_id
 }

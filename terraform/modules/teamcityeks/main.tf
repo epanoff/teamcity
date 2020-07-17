@@ -108,6 +108,7 @@ resource "aws_eks_node_group" "teamcity" {
   node_group_name = "teamcity"
   node_role_arn   = aws_iam_role.teamcity-node.arn
   subnet_ids      = var.aws_subnet_teamcity[*].id
+  instance_types  = [var.node_instance_types]
 
   scaling_config {
     desired_size = 1

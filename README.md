@@ -15,7 +15,7 @@
 ```sh
 brew install aws-iam-authenticator
 ```
-
+Проставить нужные переменные в main.tf (типы инстенса и тп)
 Далее можно пременить (на примере прода)
 ```sh
 cd prod
@@ -28,7 +28,7 @@ mkdir ~/.kube/
 terraform output kubeconfig>~/.kube/config
 ```
 
-И запускаем, тимсити с persistent volume и тремя агентами. 
+И тимсити с persistent volume, тремя агентами опубликованные через loadbalancer. 
 ```sh
 cd ../../k8s
 kubectl create -f teamcity-agent.yml
@@ -41,4 +41,4 @@ kubectl create -f teamcity-service.yml
 kubectl get service/teamcity
 ```
 
-Заходим и настраиваем подключение к бд, которую создали при помощи терреформ. 
+Заходим и настраиваем подключение к бд, параметры подключения к которой выдал терреформ. 
