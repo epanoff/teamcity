@@ -74,7 +74,7 @@ resource "aws_route_table_association" "teamcity" {
 resource "aws_route_table_association" "teamcity-agents" {
   count = 2
 
-  subnet_id      = aws_subnet.teamcity.*.id[count.index]
+  subnet_id      = aws_subnet.teamcity-agents.*.id[count.index]
   route_table_id = aws_route_table.teamcity.id
 }
 
