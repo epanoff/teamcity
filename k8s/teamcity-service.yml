@@ -7,6 +7,6 @@ spec:
   selector:
     app: teamcity
   ports:
-    - protocol: TCP
-      port: 80
+    - protocol: HTTPS
+      port: 443
       targetPort: 8111
