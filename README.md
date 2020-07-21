@@ -9,7 +9,7 @@
 - rds_db_username = "rds_db_username"
 - rds_db_password = "rds_db_password"
 
-Прописать в 
+Необходимо иметь загруженный ssl сертификат в AWS Certificate Manager. Его arn требуется поставить в teamcity-service.yml
 
 Так же потребуется поставить
 ```sh

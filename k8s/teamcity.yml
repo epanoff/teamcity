@@ -25,5 +25,5 @@ spec:
       - name: "teamcity-data"
         persistentVolumeClaim:
           claimName: "teamcity-data"
-    nodeSelector:
+      nodeSelector:
         nodetype: server
