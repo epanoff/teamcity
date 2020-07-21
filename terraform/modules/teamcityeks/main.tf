@@ -110,6 +110,34 @@ resource "aws_eks_node_group" "teamcity" {
   subnet_ids      = var.aws_subnet_teamcity[*].id
   instance_types  = [var.node_instance_types]
 
+  labels = {
+    nodetype = "server"
+  }
+
+  scaling_config {
+    desired_size = 1
+    max_size     = 1
+    min_size     = 1
+  }
+
+  depends_on = [
+    aws_iam_role_policy_attachment.teamcity-node-AmazonEKSWorkerNodePolicy,
+    aws_iam_role_policy_attachment.teamcity-node-AmazonEKS_CNI_Policy,
+    aws_iam_role_policy_attachment.teamcity-node-AmazonEC2ContainerRegistryReadOnly,
+  ]
+}
+
+resource "aws_eks_node_group" "teamcity-agents" {
+  cluster_name    = aws_eks_cluster.teamcity.name
+  node_group_name = "teamcity-agents"
+  node_role_arn   = aws_iam_role.teamcity-node.arn
+  subnet_ids      = var.aws_subnet_teamcity_agents[*].id
+  instance_types  = [var.node_instance_types]
+
+  labels = {
+    nodetype = "agent"
+  }
+
   scaling_config {
     desired_size = 1
     max_size     = 1

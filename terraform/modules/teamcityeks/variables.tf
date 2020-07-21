@@ -7,6 +7,11 @@ variable "aws_subnet_teamcity" {
   type        = list
 }
 
+variable "aws_subnet_teamcity_agents" {
+  description = "aws_subnet_teamcity_agents"
+  type        = list
+}
+
 variable "cluster-name" {
   default = "terraform-eks-teamcity"
   type    = string

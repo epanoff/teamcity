@@ -9,3 +9,7 @@ output "aws_subnet_group_teamcity" {
 output "aws_subnet_teamcity_eks" {
   value = aws_subnet.teamcity
 }
+
+output "aws_subnet_teamcity_agents_eks" {
+  value = aws_subnet.teamcity-agents
+}
