@@ -35,6 +35,7 @@ kubectl create -f teamcity-agent.yml
 kubectl create -f volume.yml
 kubectl create -f teamcity.yml
 kubectl create -f teamcity-service.yml
+kubectl create -f teamcity-agent-hpa.yaml
 ```
 Получаем опубликованный в load balancer адрес
 ```sh
