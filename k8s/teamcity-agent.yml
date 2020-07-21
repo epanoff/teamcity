@@ -25,3 +25,5 @@ spec:
           - name: agent-data
             hostPath:
                 path: /var/buildAgent
+      nodeSelector:
+        nodetype: agent
