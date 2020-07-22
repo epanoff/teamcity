@@ -22,6 +22,18 @@ variable "node_instance_types" {
   type    = string
 }
 
+variable "node_agents_instance_types" {
+  default = "t3.medium"
+  type    = string
+}
+
+
+variable "node_agents_scaling_group_max_size" {
+  description = "node_agents_scaling_group_max_size"
+}
+
+
+
 variable "workstation_ip" {
   description = "workstation_ip for sg"
 }

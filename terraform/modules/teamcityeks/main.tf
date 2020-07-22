@@ -132,7 +132,7 @@ resource "aws_eks_node_group" "teamcity-agents" {
   node_group_name = "teamcity-agents"
   node_role_arn   = aws_iam_role.teamcity-node.arn
   subnet_ids      = var.aws_subnet_teamcity_agents[*].id
-  instance_types  = [var.node_instance_types]
+  instance_types  = [var.node_agents_instance_types]
 
   labels = {
     nodetype = "agent"
@@ -140,7 +140,7 @@ resource "aws_eks_node_group" "teamcity-agents" {
 
   scaling_config {
     desired_size = 1
-    max_size     = 1
+    max_size     = var.node_agents_scaling_group_max_size
     min_size     = 1
   }
 

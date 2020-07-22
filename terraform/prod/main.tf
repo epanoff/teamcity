@@ -25,10 +25,12 @@ module "vpc" {
 }
 
 module "teamcityeks" {
-  source                     = "../modules/teamcityeks"
-  vpc_id                     = module.vpc.vpc_id
-  aws_subnet_teamcity        = module.vpc.aws_subnet_teamcity_eks
-  aws_subnet_teamcity_agents = module.vpc.aws_subnet_teamcity_agents_eks
-  node_instance_types        = "t3.medium"
-  workstation_ip             = "176.57.72.47"
+  source                             = "../modules/teamcityeks"
+  vpc_id                             = module.vpc.vpc_id
+  aws_subnet_teamcity                = module.vpc.aws_subnet_teamcity_eks
+  aws_subnet_teamcity_agents         = module.vpc.aws_subnet_teamcity_agents_eks
+  node_instance_types                = "t3.medium"
+  node_agents_instance_types         = "t3.medium"
+  node_agents_scaling_group_max_size = 1
+  workstation_ip                     = "84.47.134.35"
 }

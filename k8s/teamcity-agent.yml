@@ -17,7 +17,7 @@ spec:
            image: jetbrains/teamcity-agent
            env:
              - name: SERVER_URL
-               value: http://teamcity
+               value: https://teamcity
            volumeMounts:
              - name:  agent-data
                mountPath: /data
