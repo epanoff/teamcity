@@ -32,5 +32,5 @@ module "teamcityeks" {
   node_instance_types                = "t3.medium"
   node_agents_instance_types         = "t3.medium"
   node_agents_scaling_group_max_size = 1
-  workstation_ip                     = "84.47.134.35"
+  workstation_ip                     = "176.57.72.47"
 }
