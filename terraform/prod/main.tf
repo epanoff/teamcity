@@ -31,6 +31,7 @@ module "teamcityeks" {
   aws_subnet_teamcity_agents         = module.vpc.aws_subnet_teamcity_agents_eks
   node_instance_types                = "t3.medium"
   node_agents_instance_types         = "t3.medium"
-  node_agents_scaling_group_max_size = 1
+  node_agents_scaling_group_max_size = 3
+  aws_eks_cluster_version            = "1.16"
   workstation_ip                     = "176.57.72.47"
 }

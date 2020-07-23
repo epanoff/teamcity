@@ -19,7 +19,7 @@ brew install aws-iam-authenticator
 Далее можно пременить (на примере прода)
 ```sh
 cd prod
-terraform apply
+terraform apply -auto-approve
 ```
 
 В выводе он выдаст параметры подключения к бд и конфиг для подключения к кубернетису
@@ -28,14 +28,14 @@ mkdir ~/.kube/
 terraform output kubeconfig>~/.kube/config
 ```
 
-И тимсити с persistent volume, тремя агентами опубликованные через loadbalancer. 
+И тимсити с persistent volume, тремя агентами опубликованные через loadbalancer с сертификатом. 
 ```sh
 cd ../../k8s
+kubectl create -f cluster-autoscaler-autodiscover.yaml
 kubectl create -f teamcity-agent.yml
 kubectl create -f volume.yml
 kubectl create -f teamcity.yml
 kubectl create -f teamcity-service.yml
-kubectl create -f teamcity-agent-hpa.yaml
 ```
 Получаем опубликованный в load balancer адрес
 ```sh
@@ -44,6 +44,13 @@ kubectl get service/teamcity
 
 Заходим и настраиваем подключение к бд, параметры подключения к которой выдал терреформ. 
 
-
-Перед уничтожением нужно удалить созданный сервис, так как он создает elb не явный для терраформа.
+При необходимости увеличения количества агентов
+```sh
+kubectl scale deployment teamcity-agent --replicas=30
+```
+Автоскейлинг подберет нужно количество агентов. [Подробнее про автоскейлер](https://docs.aws.amazon.com/eks/latest/userguide/cluster-autoscaler.html)
+Перед уничтожением нужно удалить созданный сервис, так как он создает nlb не явный для терраформа.
+```sh
 kubectl delete service/teamcity
+```
+

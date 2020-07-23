@@ -13,14 +13,21 @@ spec:
         app: teamcity-agent
     spec:
       containers:
-         - name: teamcityagent
-           image: jetbrains/teamcity-agent
-           env:
-             - name: SERVER_URL
-               value: https://teamcity
-           volumeMounts:
-             - name:  agent-data
-               mountPath: /data
+        - name: teamcityagent
+          image: jetbrains/teamcity-agent
+          env:
+            - name: SERVER_URL
+              value: http://teamcity:443
+          volumeMounts:
+            - name:  agent-data
+              mountPath: /data
+          resources:
+            limits:
+              cpu: 100m
+              memory: 400Mi
+            requests:
+              cpu: 100m
+              memory: 300Mi
       volumes:
           - name: agent-data
             hostPath:

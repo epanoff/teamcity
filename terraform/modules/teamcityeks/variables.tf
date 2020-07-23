@@ -17,6 +17,11 @@ variable "cluster-name" {
   type    = string
 }
 
+variable "aws_eks_cluster_version" {
+  default = "1.16"
+  description = "aws_eks_cluster_version"
+}
+
 variable "node_instance_types" {
   default = "t3.medium"
   type    = string

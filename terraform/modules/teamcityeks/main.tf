@@ -58,6 +58,8 @@ resource "aws_eks_cluster" "teamcity" {
   name     = var.cluster-name
   role_arn = aws_iam_role.teamcity-cluster.arn
 
+  version = var.aws_eks_cluster_version
+
   vpc_config {
     security_group_ids = [aws_security_group.teamcity-cluster.id]
     subnet_ids         = var.aws_subnet_teamcity[*].id
@@ -86,6 +88,36 @@ resource "aws_iam_role" "teamcity-node" {
   ]
 }
 POLICY
+}
+
+resource "aws_iam_policy" "teamcity-node-policy-autoscaler" {
+  name = "teamcity-node-policy-autoscaler"
+
+  policy = <<POLICY
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": [
+                "autoscaling:DescribeAutoScalingGroups",
+                "autoscaling:DescribeAutoScalingInstances",
+                "autoscaling:DescribeLaunchConfigurations",
+                "autoscaling:DescribeTags",
+                "autoscaling:SetDesiredCapacity",
+                "autoscaling:TerminateInstanceInAutoScalingGroup",
+                "ec2:DescribeLaunchTemplateVersions"
+            ],
+            "Resource": "*",
+            "Effect": "Allow"
+        }
+    ]
+}
+POLICY
+}
+
+resource "aws_iam_role_policy_attachment" "teamcity-node-AutoscalerPolicy" {
+  policy_arn = aws_iam_policy.teamcity-node-policy-autoscaler.arn
+  role       = aws_iam_role.teamcity-node.name
 }
 
 resource "aws_iam_role_policy_attachment" "teamcity-node-AmazonEKSWorkerNodePolicy" {
@@ -136,6 +168,13 @@ resource "aws_eks_node_group" "teamcity-agents" {
 
   labels = {
     nodetype = "agent"
+  }
+
+
+  tags = {
+    "k8s.io/cluster-autoscaler/${aws_eks_cluster.teamcity.name}" = "owned",
+    "k8s.io/cluster-autoscaler/enabled"                          = "true"
+
   }
 
   scaling_config {

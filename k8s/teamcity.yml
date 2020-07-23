@@ -13,14 +13,21 @@ spec:
         app: teamcity
     spec:
       containers:
-          - name: teamcity
-            image: jetbrains/teamcity-server
-            ports:
-              - name: teamcity
-                containerPort: 8111
-            volumeMounts:
-              - name:  teamcity-data
-                mountPath: /var/lib/teamcity
+        - name: teamcity
+          image: jetbrains/teamcity-server
+          ports:
+            - name: teamcity
+              containerPort: 8111
+          volumeMounts:
+            - name:  teamcity-data
+              mountPath: /var/lib/teamcity
+          resources: 
+            limits:
+              cpu: 800m
+              memory: 968Mi
+            requests:
+              cpu: 600m
+              memory: 968Mi
       volumes:
       - name: "teamcity-data"
         persistentVolumeClaim:
