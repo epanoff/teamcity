@@ -34,3 +34,7 @@ spec:
           claimName: "teamcity-data"
       nodeSelector:
         nodetype: server
+      tolerations:
+      - key: node-role/teamcityserver
+        operator: "Exists"
+        effect: NoSchedule 
