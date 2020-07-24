@@ -36,7 +36,7 @@ terraform output kubeconfig>~/.kube/config
 И тимсити с persistent volume, тремя агентами опубликованные через loadbalancer с сертификатом. 
 ```sh
 cd ../../k8s
-kubectl taint node `kubectl get nodes -l "nodetype=server"` node-role/teamcityserver="":NoSchedule
+kubectl taint node `kubectl get nodes -l "nodetype=server" -o NAME` node-role/teamcityserver="":NoSchedule
 kubectl create -f cluster-autoscaler-autodiscover.yaml
 kubectl create -f teamcity-agent.yml
 kubectl create -f volume.yml
