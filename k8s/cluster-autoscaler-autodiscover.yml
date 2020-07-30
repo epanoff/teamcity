@@ -137,6 +137,7 @@ spec:
         prometheus.io/port: '8085'
         safe-to-evict: "false"
     spec:
+      priorityClassName: system-cluster-critical
       serviceAccountName: cluster-autoscaler
       containers:
         - image: us.gcr.io/k8s-artifacts-prod/autoscaling/cluster-autoscaler:v1.16.5
